@@ -19,6 +19,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import ChatsScreen from './src/screens/ChatsScreen';
+import ChatScreen from './src/screens/ChatScreen';
 
 
 type SectionProps = PropsWithChildren<{
@@ -30,7 +31,7 @@ function App(): JSX.Element {
 
   return (
       <View style={styles.container}>
-        <ChatsScreen/>
+        <ChatScreen/>
       </View>
       
   );
