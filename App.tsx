@@ -18,8 +18,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import ChatListItem from './src/components/ChatListItem';
-
+import ChatsScreen from './src/screens/ChatsScreen';
 
 
 type SectionProps = PropsWithChildren<{
@@ -30,10 +29,9 @@ type SectionProps = PropsWithChildren<{
 function App(): JSX.Element {
 
   return (
-      <View
-          style={styles.container}>
-          <ChatListItem/>
-        </View>
+      <View style={styles.container}>
+        <ChatsScreen/>
+      </View>
       
   );
 }
@@ -42,9 +40,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: 'center',
     justifyContent: 'center',
     color: Colors.light,
+    paddingVertical: 10
   }
 });
 
