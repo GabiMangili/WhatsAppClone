@@ -10,7 +10,6 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
 import {
   Colors,
   DebugInstructions,
@@ -20,6 +19,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import ChatsScreen from './src/screens/ChatsScreen';
 import ChatScreen from './src/screens/ChatScreen';
+import Navigator from './src/navigation';
 
 
 type SectionProps = PropsWithChildren<{
@@ -31,7 +31,7 @@ function App(): JSX.Element {
 
   return (
       <View style={styles.container}>
-        <ChatScreen/>
+        <Navigator/>
       </View>
       
   );
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     justifyContent: 'center',
     color: Colors.light,
-    paddingVertical: 10
+    paddingVertical: 5
   }
 });
 
