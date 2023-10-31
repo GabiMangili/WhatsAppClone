@@ -20,7 +20,12 @@ import {
 import ChatsScreen from './src/screens/ChatsScreen';
 import ChatScreen from './src/screens/ChatScreen';
 import Navigator from './src/navigation';
+import { Amplify } from 'aws-amplify';
+import awsconfig from './src/aws-exports';
+// @ts-ignore
+import { withAuthenticator } from 'aws-amplify-react-native';
 
+Amplify.configure({ ...awsconfig, Analytics: { disabled: true } }) 
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -47,4 +52,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default App;
+export default withAuthenticator(App);
