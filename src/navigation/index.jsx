@@ -1,4 +1,4 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { DarkTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 
@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator();
 
 const Navigator = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={DarkTheme}>
       <Stack.Navigator >
         <Stack.Screen name='Home' component={MainTabNavigator} options={{headerShown: false}}/>
         <Stack.Screen name='Chat' component={ChatScreen}/>

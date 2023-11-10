@@ -19,7 +19,7 @@ const ChatListItem = ({ user }) => {
                     <Text numberOfLines={1} style={styles.name}>
                         {user.name}
                     </Text>
-                <Text numberOfLines={1} style={styles.subTitle}>{user.status}</Text>
+                <Text numberOfLines={2} style={styles.subTitle}>{user.status}</Text>
             </View>
         </Pressable>
     );
@@ -45,12 +45,11 @@ const styles = StyleSheet.create({
 
     content: {
         flex: 1,
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        borderBottomColor: "lightgray"
     },
 
     name: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: 'white'
     },
 
     subTitle: {
