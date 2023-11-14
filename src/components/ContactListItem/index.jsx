@@ -3,16 +3,68 @@ import { Text, View, Image, StyleSheet, Pressable } from 'react-native';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useNavigation } from '@react-navigation/native';
+import { API, graphqlOperation, Auth } from 'aws-amplify';
+import { createChatRoom, createUserChatRoom } from '../../graphql/mutations';
+import { getCommonChatUserWithUser } from '../../services/chatRoomService';
+
 dayjs.extend(relativeTime);
 
 
-const ChatListItem = ({ user }) => {
-
+const ContactListItem = ({ user }) => {
+    
     const navigation = useNavigation();
     console.log(user);
 
+    const onPress = async () => {
+        console.warn("Pressed");
+
+        //Check if we already have a ChatRoom with user
+        const existingChatRoom = await getCommonChatUserWithUser(user.id);
+        if(existingChatRoom){
+            navigation.navigate("Chat", {id: existingChatRoom.id})
+            return;
+        }
+ 
+        //Create a new ChatRoom
+       /*  const newChatRoomData = await API.graphql(
+            graphqlOperation(createChatRoom, {input: {}})
+        );
+        console.log(newChatRoomData);
+
+        if(!newChatRoomData.data?.createChatRoom){
+            console.log("Error createing the chat error");
+        }
+        const newChatRoom = newChatRoomData.data?.createChatRoom;
+
+        //Add the clicked user to the chat room
+        await API.graphql(
+            graphqlOperation(
+                createUserChatRoom, {
+                    input: {chatRoomId: newChatRoom.id, userId: user.id}
+                }
+            )
+        )
+
+        //Add the auth user to the chat room
+        const authUser = await Auth.currentAuthenticatedUser();
+
+        await API.graphql(
+            graphqlOperation(
+                createUserChatRoom, {
+                    input: {chatRoomId: newChatRoom.id, userId: authUser.attributes.sub}
+                }
+            )
+        )
+
+        //console.log(newChatRoomData.data?.users);
+        //console.log(newChatRoomData.data?.Messages);
+
+        //Navigate to the newly created chat room
+        navigation.navigate("Chat", {id: newChatRoom.id}) */
+    }
+
     return (
-        <Pressable onPress={() => navigation.navigate('Chat', {id: user.id, name: user.name})} style={styles.container}>
+        <Pressable onPress={onPress} style={styles.container}>
             <Image source={{ uri: user.image }} style={styles.image}/>
         
             <View style={styles.content}>
@@ -53,8 +105,8 @@ const styles = StyleSheet.create({
     },
 
     subTitle: {
-        color: 'gray'
+        color: 'gray' 
     },
 });
 
-export default ChatListItem;
+export default ContactListItem;

@@ -10,21 +10,25 @@ const ChatListItem = ({ chat }) => {
 
     const navigation = useNavigation();
     
-    console.log(chat);
-    console.log(chat.lastMessage.createdAt);
+    //console.log("**********************************************");
+    //console.log(chat.users.items);
+
+    const user = chat.users.items[0].user
+    //console.log(user);
+  
     return (
-        <Pressable onPress={() => navigation.navigate('Chat', {id: chat.id, name: chat.user.name})} style={styles.container}>
-            <Image source={{ uri: chat.user.image }} style={styles.image}/>
+        <Pressable onPress={() => navigation.navigate('Chat', {id: id, name: user?.name})} style={styles.container}>
+            <Image source={{ uri: user?.image }} style={styles.image}/>
         
             <View style={styles.content}>
                 <View style={styles.row}>
                     <Text numberOfLines={1} style={styles.name}>
-                        {chat.user.name}
+                        {user?.name}
                     </Text>
-                    <TextFormatDate dateTime={chat.lastMessage.createdAt}></TextFormatDate>
+                    <TextFormatDate dateTime={chat.lastMessage?.createdAt}></TextFormatDate>
                 </View>
 
-                <Text numberOfLines={2} style={styles.subTitle}>{chat.lastMessage.text}</Text>
+                <Text numberOfLines={2} style={styles.subTitle}>{chat.lastMessage?.text}</Text>
             </View>
         </Pressable>
     );
@@ -43,6 +47,11 @@ const TextFormatDate = ({ dateTime })  => {
 
     console.log("today: " + today);
     console.log("lastMessageDate: " + lastMessageDate);
+
+
+    if(lastMessageDate == "Invalid Date"){
+        return <Text style={styles.subTitle}>{dayjs(lastMessageDate).fromNow(true)}</Text>
+    }
 
     if(dayjs(lastMessageDate).format('DD/MM/YYYY') == dayjs(today).format('DD/MM/YYYY')){
         return <Text style={styles.subTitle}>{dayjs(lastMessageDate).format('HH:mm')}</Text>;

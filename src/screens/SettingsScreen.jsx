@@ -3,6 +3,7 @@ import React from 'react'
 import { Auth } from 'aws-amplify'
 
 const SettingsScreen = () => {
+  console.log("------------------------------------------------------------")
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Button title="Sign Out" onPress={()=>Auth.signOut()}/>
